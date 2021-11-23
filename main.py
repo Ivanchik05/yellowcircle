@@ -4,13 +4,15 @@ from PyQt5 import uic
 from PyQt5.QtGui import QPainter, QColor
 from PyQt5.QtWidgets import QApplication, QWidget
 from random import randint
+from UI import Ui_Form
 
 
-class Example(QWidget):
+class Example(Ui_Form, QWidget):
     def __init__(self):
         super().__init__()
-        uic.loadUi("UI.ui", self)
+        self.setupUi(self)
         self.setFixedSize(400, 400)
+        self.setWindowTitle("Git и случайные окружности")
         self.is_draw = False
         self.pushButton.clicked.connect(self.run)
 
@@ -27,8 +29,8 @@ class Example(QWidget):
 
     def draw(self):
         a = randint(10, 100)
-        x, y = randint(a, 400 - 1), randint(a, 400 - 1)
-        self.qp.setBrush(QColor("yellow"))
+        x, y = randint(1, 400 - a), randint(1, 400 - a)
+        self.qp.setBrush(QColor(randint(0, 255), randint(0, 255), randint(0, 255)))
         self.qp.drawEllipse(x, y, a, a)
 
 
